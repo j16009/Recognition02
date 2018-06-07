@@ -38,29 +38,24 @@ public class Recognition02_main {
 		try {
 			JsonNode node = mapper.readTree(s);
 
-			String name = node.get("images").get(0).get("classifiers").get(0).get("name").asText();
-			System.out.println("name : " + name);
+			String object = node.get("images").get(0).get("classifiers").get(0).get("classes").get(0).get("class").toString();
+			System.out.println("class : " + object);
+			Double object_score = node.get("images").get(0).get("classifiers").get(0).get("classes").get(0).get("score").asDouble();
+			System.out.println("class_score : " + object_score);
 
-			String classifier_id = node.get("images").get(0).get("classifiers").get(0).get("classifier_id").asText();
-			System.out.println("classifier_id : " + classifier_id);
+			String color1 = node.get("images").get(0).get("classifiers").get(0).get("classes").get(1).get("class").toString();
+			System.out.println("color1 : " + color1);
+			Double color_score1 = node.get("images").get(0).get("classifiers").get(0).get("classes").get(1).get("score").asDouble();
+			System.out.println("color_score1 : " + color_score1);
 
-			String classes_class0 = node.get("images").get(0).get("classifiers").get(0).get("classes").get(0).get("class").asText();
-			System.out.println("classes_class0 : " + classes_class0);
+			String color2 = node.get("images").get(0).get("classifiers").get(0).get("classes").get(2).get("class").toString();
+			System.out.println("color2 : " + color2);
+			Double color_score2 = node.get("images").get(0).get("classifiers").get(0).get("classes").get(2).get("score").asDouble();
+			System.out.println("color_score2 : " + color_score2);
 
-			String classes_score0 = node.get("images").get(0).get("classifiers").get(0).get("classes").get(0).get("score").asText();
-			System.out.println("classes_score0 : " + classes_score0);
 
-			String classes_class1 = node.get("images").get(0).get("classifiers").get(0).get("classes").get(1).get("class").asText();
-			System.out.println("classes_class1 : " + classes_class1);
-
-			String classes_score1 = node.get("images").get(0).get("classifiers").get(0).get("classes").get(1).get("score").asText();
-			System.out.println("classes_score1 : " + classes_score1);
-
-			String classes_class2 = node.get("images").get(0).get("classifiers").get(0).get("classes").get(2).get("class").asText();
-			System.out.println("classes_class2 : " + classes_class2);
-
-			String classes_score2 = node.get("images").get(0).get("classifiers").get(0).get("classes").get(2).get("score").asText();
-			System.out.println("classes_score2 : " + classes_score2);
+			MySQL mysql = new MySQL();
+			mysql.updateImage(object,object_score,color1,color_score1,color2,color_score2);
 
 
 		} catch (IOException e) {
